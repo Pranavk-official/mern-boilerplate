@@ -1,10 +1,16 @@
 {
   "name": "mern-boilerplate",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "description": "A minimal boilerplate for MERN stack projects",
+  "main": "app.js",
+  "type": "module",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "backend-install": "npm install --prefix backend",
+    "frontend-install": "npm install --prefix frontend",
+    "server": "nodemon backend/app.js",
+    "client": "npm run dev --prefix frontend",
+    "dev": "concurrently \"npm run server\" \"npm run client\""
   },
   "keywords": [],
   "author": "",
