@@ -55,117 +55,107 @@ function AdminHome() {
   };
 
   const filteredUsers = users.filter((val) =>
-    val.username.toLowerCase().startsWith(search.toLowerCase()),
+    val?.username?.toLowerCase().startsWith(search.toLowerCase()),
   );
 
   return (
-    <>
+    <div className="flex h-screen bg-gray-100">
       <AdminHeader />
-      <div className="h-screen overflow-hidden">
-        <div className="max-w-4xl mx-auto">
-          <h1 className="text-2xl font-bold mb-4 text-center text-slate-700 mt-10">
-            Users
-          </h1>
-          <div className="flex justify-between mb-4">
-            <Link to="/admin/addUser">
-              <button className="flex justify-between  bg-slate-700 text-white rounded-lg uppercase hover:opacity-85 disabled:opacity-80 max-w-xl px-8 py-2 my-2">
-                Add User
-              </button>
-            </Link>
-            <input
-              className="border border-gray-300 p-1 "
-              type="search"
-              placeholder="Search by User Name"
-              value={search}
-              onChange={(e) => setSearch(e.target.value)}
-            />
+      <div className="flex-1 flex flex-col overflow-hidden">
+        <main className="flex-1 overflow-x-hidden overflow-y-auto bg-gray-200">
+          <div className="container mx-auto px-6 py-8">
+            <h3 className="text-3xl font-medium text-gray-700">Users</h3>
+            <div className="mt-8">
+              <div className="flex flex-col md:flex-row justify-between mb-4">
+                <Link to="/admin/addUser">
+                  <button className="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded mb-2 md:mb-0">
+                    Add User
+                  </button>
+                </Link>
+                <input
+                  className="border rounded-lg px-4 py-2 w-full md:w-64"
+                  type="search"
+                  placeholder="Search by User Name"
+                  value={search}
+                  onChange={(e) => setSearch(e.target.value)}
+                />
+              </div>
+              <div className="flex flex-col mt-8">
+                <div className="-my-2 py-2 overflow-x-auto sm:-mx-6 sm:px-6 lg:-mx-8 lg:px-8">
+                  <div className="align-middle inline-block min-w-full shadow overflow-hidden sm:rounded-lg border-b border-gray-200">
+                    <table className="min-w-full">
+                      <thead>
+                        <tr>
+                          <th className="px-6 py-3 border-b border-gray-200 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">
+                            No
+                          </th>
+                          <th className="px-6 py-3 border-b border-gray-200 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">
+                            Profile
+                          </th>
+                          <th className="px-6 py-3 border-b border-gray-200 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">
+                            User Name
+                          </th>
+                          <th className="px-6 py-3 border-b border-gray-200 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">
+                            Email
+                          </th>
+                          <th className="px-6 py-3 border-b border-gray-200 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">
+                            Actions
+                          </th>
+                        </tr>
+                      </thead>
+                      <tbody className="bg-white">
+                        {(search === "" ? users : filteredUsers).map(
+                          (user, index) => (
+                            <tr key={user._id}>
+                              <td className="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
+                                <div className="text-sm leading-5 text-gray-900">
+                                  {index + 1}
+                                </div>
+                              </td>
+                              <td className="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
+                                <img
+                                  className="h-10 w-10 rounded-full"
+                                  src={user.profilePicture}
+                                  alt=""
+                                />
+                              </td>
+                              <td className="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
+                                <div className="text-sm leading-5 text-gray-900">
+                                  {user.username}
+                                </div>
+                              </td>
+                              <td className="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
+                                <div className="text-sm leading-5 text-gray-900">
+                                  {user.email}
+                                </div>
+                              </td>
+                              <td className="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
+                                <button
+                                  onClick={() => handleEdit(user._id)}
+                                  className="text-indigo-600 hover:text-indigo-900 mr-2"
+                                >
+                                  Edit
+                                </button>
+                                <button
+                                  onClick={() => handleDelete(user._id)}
+                                  className="text-red-600 hover:text-red-900"
+                                >
+                                  Delete
+                                </button>
+                              </td>
+                            </tr>
+                          ),
+                        )}
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
-
-          <table className="w-full border-collapse border border-gray-300 bg-white">
-            <thead className="bg-slate-200">
-              <tr>
-                <th className="border border-gray-300 px-4 py-2">No</th>
-                <th className="border border-gray-300 px-4 py-2">Profile</th>
-                <th className="border border-gray-300 px-4 py-2">User Name</th>
-                <th className="border border-gray-300 px-4 py-2">Email</th>
-                <th className="border border-gray-300 px-4 py-2">Actions</th>
-              </tr>
-            </thead>
-            <tbody>
-              {search == ""
-                ? users.map((user, index) => (
-                    <tr key={user._id}>
-                      <td className="border border-gray-300 px-4 py-2">
-                        {index + 1}
-                      </td>
-                      <td className="border border-gray-300 px-4 py-2">
-                        <img
-                          className="h-10 rounded-lg"
-                          src={user.profilePicture}
-                          alt=""
-                        />
-                      </td>
-                      <td className="border border-gray-300 px-4 py-2">
-                        {user.username}
-                      </td>
-                      <td className="border border-gray-300 px-4 py-2">
-                        {user.email}
-                      </td>
-                      <td className="border border-gray-300 px-4 py-2">
-                        <button
-                          onClick={() => handleEdit(user._id)}
-                          className="bg-slate-500 hover:bg-slate-400 text-white font-bold py-1 px-2 rounded mr-2"
-                        >
-                          Edit
-                        </button>
-                        <button
-                          onClick={() => handleDelete(user._id)}
-                          className="bg-slate-700 hover:bg-slate-600 text-white font-bold py-1 px-2 rounded"
-                        >
-                          Delete
-                        </button>
-                      </td>
-                    </tr>
-                  ))
-                : filteredUsers.map((user, index) => (
-                    <tr key={user._id}>
-                      <td className="border border-gray-300 px-4 py-2">
-                        {index + 1}
-                      </td>
-                      <td className="border border-gray-300 px-4 py-2">
-                        <img
-                          className="h-24 rounded-lg"
-                          src={`${user.profilePicture}`}
-                          alt=""
-                        />
-                      </td>
-                      <td className="border border-gray-300 px-4 py-2">
-                        {user.username}
-                      </td>
-                      <td className="border border-gray-300 px-4 py-2">
-                        {user.email}
-                      </td>
-                      <td className="border border-gray-300 px-4 py-2">
-                        <button
-                          onClick={() => handleEdit(user._id)}
-                          className="bg-yellow-500 hover:bg-yellow-700 text-white font-bold py-1 px-2 rounded mr-2"
-                        >
-                          Edit
-                        </button>
-                        <button
-                          onClick={() => handleDelete(user._id)}
-                          className="bg-red-500 hover:bg-red-700 text-white font-bold py-1 px-2 rounded"
-                        >
-                          Delete
-                        </button>
-                      </td>
-                    </tr>
-                  ))}
-            </tbody>
-          </table>
-        </div>
+        </main>
       </div>
-    </>
+    </div>
   );
 }
 

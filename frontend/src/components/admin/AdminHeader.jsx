@@ -13,7 +13,7 @@ export default function AdminHeader() {
       await fetch("/api/admin/logout");
       dispatch(adminLogout());
       navigate("/admin");
-      toast.success("Sign Out Successfull", {
+      toast.success("Sign Out Successful", {
         className: "text-green-600",
         autoClose: 1000,
         hideProgressBar: true,
@@ -22,26 +22,41 @@ export default function AdminHeader() {
       console.log(error);
     }
   };
-  return (
-    <div className="bg-slate-200">
-      <div className="flex justify-between items-center max-w-6xl mx-auto p-3">
-        <Link to="/">
-          <h1 className="font-bold text-slate-700">User Management App</h1>
-        </Link>
-        <ul className="flex gap-4">
-          {admin ? <li className="text-slate-600">{admin.name}</li> : ""}
 
-          {admin ? (
-            <li
-              onClick={handleLogOut}
-              className="text-red-600 font-bold cursor-pointer"
-            >
-              Sign Out
-            </li>
-          ) : (
-            ""
-          )}
-        </ul>
+  return (
+    <div className="bg-gray-800 text-white w-64 min-h-screen flex flex-col">
+      <div className="flex items-center justify-center h-16 bg-gray-900">
+        <Link to="/">
+          <h1 className="text-xl font-semibold">User Management</h1>
+        </Link>
+      </div>
+      <nav className="flex-1 px-2 py-4">
+        <Link
+          to="/admin/home"
+          className="block px-4 py-2 mt-2 text-sm font-semibold text-gray-300 rounded-lg hover:bg-gray-700"
+        >
+          Dashboard
+        </Link>
+        <Link
+          to="/admin/home"
+          className="block px-4 py-2 mt-2 text-sm font-semibold text-gray-300 rounded-lg hover:bg-gray-700"
+        >
+          Users
+        </Link>
+        {/* Add more nav items here */}
+      </nav>
+      <div className="p-4 border-t border-gray-700">
+        <div className="flex items-center">
+          <span className="text-sm font-medium">
+            {admin ? admin.name : "Admin"}
+          </span>
+        </div>
+        <button
+          onClick={handleLogOut}
+          className="mt-2 w-full text-sm text-gray-400 hover:text-white"
+        >
+          Sign Out
+        </button>
       </div>
     </div>
   );
