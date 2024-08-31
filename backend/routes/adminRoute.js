@@ -8,7 +8,7 @@ import {
   userEdit,
 } from "../controllers/adminController.js";
 import { verifyToken } from "../utils/verifyAdmin.js";
-import { adminLogout } from "../../client/src/redux/admin/adminSlice.js";
+import { adminLogout } from "../controllers/adminController.js";
 
 const router = express.Router();
 
