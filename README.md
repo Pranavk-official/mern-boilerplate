@@ -1,5 +1,3 @@
-Certainly! Here's the README formatted as a proper Markdown file:
-
 # MERN Boilerplate
 
 ## Description
