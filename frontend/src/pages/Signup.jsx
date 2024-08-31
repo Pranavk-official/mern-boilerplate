@@ -57,11 +57,11 @@ export default function SignUp() {
     <>
       <Header />
       <div className="w-full">
-        <div className="flex h-full flex-col justify-center before:min-h-[4rem] before:flex-1 after:flex-1 md:before:min-h-[5rem]">
+        <div className="flex h-full flex-col justify-center before:min-h-[4rem] before:flex-1 after:flex-1 md:before:min-h-[5rem] mt-0">
           <div className="px-4 sm:px-6">
             <div className="mx-auto w-full max-w-sm">
               <div className="py-16 md:py-20">
-                <div className="max-w-md mx-auto p-6">
+                <div className="max-w-md mx-auto p-6 pt-0">
                   <div className="mb-10">
                     <h1 className="text-4xl font-bold">Create your account</h1>
                   </div>
