@@ -11,6 +11,7 @@ This is a minimal boilerplate for MERN (MongoDB, Express, React, Node.js) stack 
 - [Prerequisites](#prerequisites)
 - [Installation](#installation)
 - [Environment Setup](#environment-setup)
+- [Firebase Configuration](#firebase-configuration)
 - [Running the Application](#running-the-application)
 - [Project Structure](#project-structure)
 - [Available Scripts](#available-scripts)
@@ -24,6 +25,7 @@ Before you begin, ensure you have met the following requirements:
 * [Node.js](https://nodejs.org/) (v14 or later)
 * [npm](https://www.npmjs.com/) (usually comes with Node.js)
 * [MongoDB](https://www.mongodb.com/) (local installation or Atlas account)
+* [Firebase](https://firebase.google.com/) account
 
 ## Installation
 
@@ -57,6 +59,51 @@ Before you begin, ensure you have met the following requirements:
    JWT_SECRET=your_jwt_secret
    ```
    Replace `your_mongodb_connection_string` with your actual MongoDB connection string and `your_jwt_secret` with a secure random string for JWT encryption.
+
+   ## Firebase Configuration
+
+   1. Create a Firebase project in the [Firebase Console](https://console.firebase.google.com/).
+
+   2. In your project settings, find the Firebase configuration object.
+
+   3. In the frontend directory, create a file named `firebase.js` (or `firebase.ts` if using TypeScript) with the following content:
+
+      ```javascript
+      import { initializeApp } from "firebase/app";
+      import { getAuth } from "firebase/auth";
+      import { getFirestore } from "firebase/firestore";
+      import { getStorage } from "firebase/storage";
+
+      const firebaseConfig = {
+        apiKey: import.meta.env.VITE_FIREBASE_API_KEY,
+        authDomain: import.meta.env.VITE_FIREBASE_AUTH_DOMAIN,
+        projectId: import.meta.env.VITE_FIREBASE_PROJECT_ID,
+        storageBucket: import.meta.env.VITE_FIREBASE_STORAGE_BUCKET,
+        messagingSenderId: import.meta.env.VITE_FIREBASE_MESSAGING_SENDER_ID,
+        appId: import.meta.env.VITE_FIREBASE_APP_ID,
+      };
+
+      const app = initializeApp(firebaseConfig);
+      const auth = getAuth(app);
+      const db = getFirestore(app);
+      const storage = getStorage(app);
+
+      export { app, auth, db, storage };
+      ```
+
+   4. In the frontend directory, create a `.env` file and add your Firebase configuration:
+
+      ```
+      VITE_FIREBASE_API_KEY=your_api_key
+      VITE_FIREBASE_AUTH_DOMAIN=your_auth_domain
+      VITE_FIREBASE_PROJECT_ID=your_project_id
+      VITE_FIREBASE_STORAGE_BUCKET=your_storage_bucket
+      VITE_FIREBASE_MESSAGING_SENDER_ID=your_messaging_sender_id
+      VITE_FIREBASE_APP_ID=your_app_id
+      ```
+
+      Replace the values with your actual Firebase configuration.
+
 
 ## Running the Application
 
@@ -118,6 +165,7 @@ In the project directory, you can run:
   - React (with Vite as build tool)
   - React Router for navigation
   - Axios for API requests
+  - Firebase for Google Authentication and Image storage
 
 
 ## Contact
