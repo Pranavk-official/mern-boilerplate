@@ -7,7 +7,6 @@ import {
   updateUserSuccess,
 } from "../store/user/userSlice.js";
 import { toast } from "react-toastify";
-import OAuth from "../components/auth/OAuth.jsx";
 import Header from "../components/auth/Header.jsx";
 
 export default function SignUp() {
@@ -113,7 +112,7 @@ export default function SignUp() {
                       </button>
                     </div>
                   </form>
-                  <OAuth />
+
                   <div className="mt-6 text-center">
                     <Link
                       className="text-sm text-gray-700 underline hover:no-underline"

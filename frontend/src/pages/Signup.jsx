@@ -163,7 +163,6 @@ export default function SignUp() {
                       >
                         {loading ? "Loading..." : "Register"}
                       </button>
-                      <OAuth />
                     </div>
                   </form>
 
