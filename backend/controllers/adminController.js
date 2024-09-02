@@ -5,15 +5,15 @@ import bcrypt from "bcryptjs";
 import { errorHandler } from "../utils/error.js";
 
 export const adminLogin = async (req, res, next) => {
-  console.log(req.body);
   const { name, password } = req.body;
 
   try {
     const admin = await Admin.findOne({ name });
     if (!admin) return next(errorHandler(404, "Admin not found"));
 
-    if (password !== admin.password)
-      return next(errorHandler(403, "Wrong credentials"));
+    const validPassword = await bcrypt.compare(password, admin.password);
+    if (!validPassword) return next(errorHandler(403, "Wrong credentials"));
+
     const token = jwt.sign({ id: admin._id }, process.env.JWT_SECRET);
     const { password: _, ...rest } = admin._doc;
     const expiryDate = new Date(Date.now() + 360000);
@@ -22,7 +22,24 @@ export const adminLogin = async (req, res, next) => {
       .status(200)
       .json(rest);
   } catch (error) {
-    console.log(error);
+    next(error);
+  }
+};
+
+export const adminSignup = async (req, res, next) => {
+  const { name, password } = req.body;
+  try {
+    const existingAdmin = await Admin.findOne({ name });
+    if (existingAdmin) {
+      return next(errorHandler(400, "Admin name already exists"));
+    }
+
+    const hashedPassword = bcrypt.hashSync(password, 10);
+    const newAdmin = new Admin({ name, password: hashedPassword });
+    await newAdmin.save();
+    res.status(201).json({ message: "Admin created successfully" });
+  } catch (error) {
+    next(error);
   }
 };
 

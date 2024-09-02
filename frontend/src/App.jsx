@@ -15,6 +15,7 @@ import AdminHome from "./pages/admin/AdminHome";
 import AdminPrivateRoute from "./components/admin/AdminPrivateRoute";
 import EditUser from "./pages/admin/EditUser";
 import AddUser from "./pages/admin/AddUser";
+import AdminSignUp from "./pages/admin/AdminSignup";
 
 function App() {
   return (
@@ -31,6 +32,7 @@ function App() {
 
       <Routes>
         <Route path="/admin" element={<Login />} />
+        <Route path="/admin/sign-up" element={<AdminSignUp />} />
 
         <Route element={<AdminPrivateRoute />}>
           <Route path="/admin/home" element={<AdminHome />} />
