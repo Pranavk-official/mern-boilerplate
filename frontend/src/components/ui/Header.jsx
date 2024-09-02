@@ -27,7 +27,7 @@ const Header = () => {
     try {
       await fetch("/api/auth/signout");
       dispatch(signout());
-      navigate("/signin");
+      navigate("/sign-in");
       toast.success("Sign Out Successful", {
         className: "text-green-600",
         autoClose: 1000,
@@ -71,7 +71,7 @@ const Header = () => {
               <>
                 <li>
                   <Link
-                    to="/signin"
+                    to="/sign-in"
                     className="btn-sm bg-white text-gray-800 shadow hover:bg-gray-50"
                   >
                     Login
@@ -79,7 +79,7 @@ const Header = () => {
                 </li>
                 <li>
                   <Link
-                    to="/signup"
+                    to="/sign-up"
                     className="btn-sm bg-gray-800 text-gray-200 shadow hover:bg-gray-900"
                   >
                     Register
