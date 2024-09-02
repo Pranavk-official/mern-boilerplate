@@ -2,7 +2,6 @@ import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import Header from "../components/auth/Header";
 import { useSelector } from "react-redux";
-import OAuth from "../components/auth/OAuth";
 
 export default function SignUp() {
   const [formData, setFormData] = useState({
@@ -163,7 +162,6 @@ export default function SignUp() {
                       >
                         {loading ? "Loading..." : "Register"}
                       </button>
-                      <OAuth />
                     </div>
                   </form>
 
