@@ -58,6 +58,15 @@ Before you begin, ensure you have met the following requirements:
    ```
    Replace `your_mongodb_connection_string` with your actual MongoDB connection string and `your_jwt_secret` with a secure random string for JWT encryption.
 
+   ## Frontend Proxy Configuration
+
+   1. In the frontend directory, craete a .env file and add the backend proxy url:
+      ```
+      VITE_API_URL = your_server_url
+      ```
+
+      `your_server_url` could be local or the hosted url, example: `http:localhost:3000`
+
    ## Firebase Configuration
 
    1. Create a Firebase project in the [Firebase Console](https://console.firebase.google.com/).
