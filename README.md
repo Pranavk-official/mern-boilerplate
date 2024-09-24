@@ -98,6 +98,7 @@ Before you begin, ensure you have met the following requirements:
       VITE_FIREBASE_STORAGE_BUCKET=your_storage_bucket
       VITE_FIREBASE_MESSAGING_SENDER_ID=your_messaging_sender_id
       VITE_FIREBASE_APP_ID=your_app_id
+      VITE_API_URL = your_server_url
       ```
 
       Replace the values with your actual Firebase configuration.
